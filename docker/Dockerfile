@@ -7,7 +7,7 @@ RUN apt-get update
 
 WORKDIR /app
 ARG CACHEBUST=1
-RUN git clone https://github.com/ostris/ai-toolkit.git && \
+RUN git clone https://github.com/amanzoni1/ai-toolkit.git && \
     cd ai-toolkit && \
     git submodule update --init --recursive
 
