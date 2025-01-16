@@ -15,7 +15,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def generate_images(prompts: list, output_dir: str, model_path: str, 
-                   num_steps: int = 20, guidance_scale: float = 4.0):
+                   num_steps: int = 40, guidance_scale: float = 4.5):
     """Generate images using the trained model.
     
     Args:
@@ -44,8 +44,8 @@ def generate_images(prompts: list, output_dir: str, model_path: str,
                 prompt=prompt,
                 num_inference_steps=num_steps,
                 guidance_scale=guidance_scale,
-                height=512,
-                width=512
+                height=1024,
+                width=768
             ).images[0]
             
             output_path = os.path.join(output_dir, f"gen_{idx:03d}.png")
@@ -71,8 +71,8 @@ def main():
         model_path = os.environ['MODEL_PATH']
         
         # Optional parameters
-        num_steps = int(os.environ.get('NUM_STEPS', '20'))
-        guidance_scale = float(os.environ.get('GUIDANCE_SCALE', '4.0'))
+        num_steps = int(os.environ.get('NUM_STEPS', '40'))
+        guidance_scale = float(os.environ.get('GUIDANCE_SCALE', '4.5'))
         
         # Run generation
         generate_images(
