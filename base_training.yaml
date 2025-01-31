@@ -4,11 +4,11 @@ config:
   # this name will be the folder and filename name
   name: "my_first_flux_lora_v1"
   process:
-    - type: 'sd_trainer'
+    - type: "sd_trainer"
       # root folder to save training sessions/samples/weights
       training_folder: "output"
       # uncomment to see performance stats in the terminal every N steps
-#      performance_log_every: 1000
+      #      performance_log_every: 1000
       device: cuda:0
       # if a trigger word is specified, it will be added to captions of training data if it does not already exist
       # alternatively, in your captions you can add [trigger] and it will be replaced with the trigger word
@@ -22,9 +22,9 @@ config:
         save_every: 50 # save every this many steps
         max_step_saves_to_keep: 1 # how many intermittent saves to keep
         push_to_hub: false #change this to True to push your trained model to Hugging Face.
-        # You can either set up a HF_TOKEN env variable or you'll be prompted to log-in         
-#       hf_repo_id: your-username/your-model-slug
-#       hf_private: true #whether the repo is private or public
+        # You can either set up a HF_TOKEN env variable or you'll be prompted to log-in
+      #       hf_repo_id: your-username/your-model-slug
+      #       hf_private: true #whether the repo is private or public
       datasets:
         # datasets are a folder of images. captions need to be txt files with the same name as the image
         # for instance image2.jpg and image2.txt. Only jpg, jpeg, and png are supported currently
@@ -33,17 +33,17 @@ config:
         # "C:\\path\\to\\images\\folder"
         - folder_path: "dataset"
           caption_ext: "txt"
-          caption_dropout_rate: 0.05  # will drop out the caption 5% of time
-          shuffle_tokens: false  # shuffle caption order, split by commas
-          cache_latents_to_disk: true  # leave this true unless you know what you're doing
-          resolution: [ 512, 768, 1024 ]  # flux enjoys multiple resolutions
+          caption_dropout_rate: 0.05 # will drop out the caption 5% of time
+          shuffle_tokens: false # shuffle caption order, split by commas
+          cache_latents_to_disk: true # leave this true unless you know what you're doing
+          resolution: [512, 768, 1024] # flux enjoys multiple resolutions
       train:
         batch_size: 1
-        steps: 50  # total number of steps to train 500 - 4000 is a good range
+        steps: 50 # total number of steps to train 500 - 4000 is a good range
         gradient_accumulation_steps: 1
         train_unet: true
-        train_text_encoder: false  # probably won't work with flux
-        gradient_checkpointing: true  # need the on unless you have a ton of vram
+        train_text_encoder: false # probably won't work with flux
+        gradient_checkpointing: false # need the on unless you have a ton of vram
         noise_scheduler: "flowmatch" # for training only
         optimizer: "adamw8bit"
         lr: 1e-4
@@ -52,7 +52,7 @@ config:
         # uncomment to completely disable sampling
         disable_sampling: true
         # uncomment to use new vell curved weighting. Experimental but may produce better results
-#        linear_timesteps: true
+        #        linear_timesteps: true
 
         # ema will smooth out learning, but could slow it down. Recommended to leave on.
         ema_config:
@@ -65,7 +65,7 @@ config:
         # huggingface model name or path
         name_or_path: "black-forest-labs/FLUX.1-dev"
         is_flux: true
-        quantize: true  # run 8bit mixed precision
+        quantize: true # run 8bit mixed precision
 #        low_vram: true  # uncomment this if the GPU is connected to your monitors. It will use less vram to quantize, but is slower.
 #       sample:
 #         sampler: "flowmatch" # must match train.noise_scheduler
@@ -93,4 +93,4 @@ config:
 # you can add any additional meta info here. [name] is replaced with config name at top
 meta:
   name: "[name]"
-  version: '1.0'
+  version: "1.0"
