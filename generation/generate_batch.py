@@ -14,10 +14,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def generate_images(prompts: list, output_dir: str, model_path: str, 
+def generate_images(prompts: list, output_dir: str, model_path: str,
                    num_steps: int = 40, guidance_scale: float = 4.5):
     """Generate images using the trained model.
-    
+
     Args:
         prompts (list): List of prompts to generate images from
         output_dir (str): Directory to save generated images
@@ -33,27 +33,27 @@ def generate_images(prompts: list, output_dir: str, model_path: str,
         )
         pipeline.load_lora_weights(".", weight_name=model_path)
         pipeline = pipeline.to("cuda")
-        
+
         os.makedirs(output_dir, exist_ok=True)
-        
+
         for idx, prompt in enumerate(prompts):
             logger.info(f"Generating image {idx+1}/{len(prompts)}")
             logger.info(f"Prompt: {prompt}")
-            
+
             image = pipeline(
                 prompt=prompt,
                 num_inference_steps=num_steps,
                 guidance_scale=guidance_scale,
                 height=1024,
-                width=768
+                width=1024
             ).images[0]
-            
+
             output_path = os.path.join(output_dir, f"gen_{idx:03d}.png")
             image.save(output_path)
             logger.info(f"Saved image to: {output_path}")
-            
+
         logger.info("Generation completed successfully")
-        
+
     except Exception as e:
         logger.error(f"Generation failed: {str(e)}")
         raise
@@ -65,15 +65,15 @@ def main():
         missing_vars = [var for var in required_vars if var not in os.environ]
         if missing_vars:
             raise ValueError(f"Missing required environment variables: {missing_vars}")
-            
+
         prompts = json.loads(os.environ['PROMPTS'])
         output_dir = os.environ['OUTPUT_DIR']
         model_path = os.environ['MODEL_PATH']
-        
+
         # Optional parameters
         num_steps = int(os.environ.get('NUM_STEPS', '40'))
         guidance_scale = float(os.environ.get('GUIDANCE_SCALE', '4.5'))
-        
+
         # Run generation
         generate_images(
             prompts=prompts,
@@ -82,11 +82,10 @@ def main():
             num_steps=num_steps,
             guidance_scale=guidance_scale
         )
-        
+
     except Exception as e:
         logger.error(f"Error in main: {str(e)}")
         sys.exit(1)
 
 if __name__ == "__main__":
     main()
-
