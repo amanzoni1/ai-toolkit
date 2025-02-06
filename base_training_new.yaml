@@ -2,7 +2,7 @@
 job: extension
 config:
   # this name will be the folder and filename name
-  name: "my_first_flux_lora_v1"
+  name: "my_first_flex_lora_v1"
   process:
     - type: "sd_trainer"
       # root folder to save training sessions/samples/weights
@@ -36,13 +36,16 @@ config:
           caption_dropout_rate: 0.05 # will drop out the caption 5% of time
           shuffle_tokens: false # shuffle caption order, split by commas
           cache_latents_to_disk: true # leave this true unless you know what you're doing
-          resolution: [512, 768, 1024] # flux enjoys multiple resolutions
+          resolution: [512, 768, 1024] # flex enjoys multiple resolutions
       train:
         batch_size: 1
+        # IMPORTANT! For Flex, you must bypass the guidance embedder during training
+        bypass_guidance_embedding: true
+
         steps: 50 # total number of steps to train 500 - 4000 is a good range
-        gradient_accumulation_steps: 1
+        gradient_accumulation: 1
         train_unet: true
-        train_text_encoder: false # probably won't work with flux
+        train_text_encoder: false # probably won't work with flex
         gradient_checkpointing: true # need the on unless you have a ton of vram
         noise_scheduler: "flowmatch" # for training only
         optimizer: "adamw8bit"
@@ -59,14 +62,16 @@ config:
           use_ema: true
           ema_decay: 0.99
 
-        # will probably need this if gpu supports it for flux, other dtypes may not work correctly
+        # will probably need this if gpu supports it for flex, other dtypes may not work correctly
         dtype: bf16
       model:
         # huggingface model name or path
-        name_or_path: "black-forest-labs/FLUX.1-dev"
+        name_or_path: "ostris/Flex.1-alpha"
         is_flux: true
         quantize: true # run 8bit mixed precision
-#        low_vram: true  # uncomment this if the GPU is connected to your monitors. It will use less vram to quantize, but is slower.
+        quantize_kwargs:
+          exclude:
+            - "*time_text_embed*" # exclude the time text embedder from quantization
 #       sample:
 #         sampler: "flowmatch" # must match train.noise_scheduler
 #         sample_every: 250 # sample every this many steps
@@ -85,11 +90,11 @@ config:
 #           - "photo of a man, white background, medium shot, modeling clothing, studio lighting, white backdrop"
 #           - "a man holding a sign that says, 'this is a sign'"
 #           - "a bulldog, in a post apocalyptic world, with a shotgun, in a leather jacket, in a desert, with a motorcycle"
-#         neg: ""  # not used on flux
+#         neg: ""  # not used on flex
 #         seed: 42
 #         walk_seed: true
 #         guidance_scale: 4
-#         sample_steps: 20
+#         sample_steps: 25
 # you can add any additional meta info here. [name] is replaced with config name at top
 meta:
   name: "[name]"
