@@ -1,5 +1,6 @@
-torch==2.4.1
-torchvision==0.19.1
+--extra-index-url https://download.pytorch.org/whl/torch_stable.html
+torch==2.4.1+cu118
+torchvision==0.19.1+cu118
 safetensors
 diffusers==0.31.0
 transformers
