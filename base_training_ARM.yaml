@@ -16,7 +16,7 @@ config:
       save:
         dtype: float32
         save_every: 200
-        max_step_saves_to_keep: 5
+        max_step_saves_to_keep: 7
         push_to_hub: false
 
       datasets:
@@ -29,7 +29,7 @@ config:
 
       train:
         batch_size: 1
-        steps: 2600
+        steps: 3200
         gradient_accumulation: 1
         train_unet: true
         train_text_encoder: false
@@ -51,7 +51,6 @@ config:
         name_or_path: "black-forest-labs/FLUX.1-dev"
         is_flux: true
         quantize: false
-        # transformer_only: false
 
       sample:
         sampler: "flowmatch"
