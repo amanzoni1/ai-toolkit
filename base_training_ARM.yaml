@@ -29,7 +29,7 @@ config:
 
       train:
         batch_size: 1
-        steps: 3200
+        steps: 3600
         gradient_accumulation: 1
         train_unet: true
         train_text_encoder: false
