@@ -15,7 +15,7 @@ config:
 
       save:
         dtype: float32
-        save_every: 2669
+        save_every: 50
         max_step_saves_to_keep: 1
         push_to_hub: false
 
@@ -29,7 +29,7 @@ config:
 
       train:
         batch_size: 1
-        steps: 2669
+        steps: 50
         gradient_accumulation: 1
         train_unet: true
         train_text_encoder: false

@@ -19,6 +19,6 @@ RUN git clone https://github.com/amanzoni1/ai-toolkit.git /app/ai-toolkit && \
 
 WORKDIR /app/ai-toolkit
 
-RUN pip install --no-cache-dir -r requirementsARM.txt
+RUN pip install --no-cache-dir -r requirementsMI.txt
 
 RUN pip install --no-cache-dir transformers accelerate peft diffusers safetensors
