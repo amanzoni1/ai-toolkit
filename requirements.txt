@@ -30,4 +30,5 @@ huggingface_hub
 peft
 gradio
 python-slugify
+setuptools==65.5.1
 packaging
