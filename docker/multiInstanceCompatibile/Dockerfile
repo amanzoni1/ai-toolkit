@@ -1,5 +1,5 @@
 # ARM64-compatible PyTorch + CUDA base
-FROM nvcr.io/nvidia/pytorch:25.01-py3-igpu
+FROM nvcr.io/nvidia/pytorch:24.01-py3-igpu
 
 LABEL maintainer="amanzoni1"
 
