@@ -30,4 +30,4 @@ huggingface_hub
 peft
 gradio
 python-slugify
-opencv-python==4.6.0.66
+opencv-python==4.5.5.64
