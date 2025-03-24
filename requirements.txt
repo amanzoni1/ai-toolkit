@@ -1,6 +1,7 @@
 safetensors
 diffusers==0.31.0
-transformers==4.34.1
+transformers==4.29.2
+huggingface_hub==0.14.1
 lycoris-lora==1.8.3
 flatten_json
 pyyaml
@@ -26,7 +27,6 @@ lpips
 pytorch_fid
 optimum-quanto==0.2.4
 sentencepiece
-huggingface_hub
 peft
 gradio
 python-slugify
