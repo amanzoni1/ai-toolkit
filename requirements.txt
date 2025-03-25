@@ -1,7 +1,7 @@
 safetensors
 diffusers==0.31.0
 transformers==4.29.2
-huggingface_hub==0.14.1
+huggingface_hub==0.13.3
 lycoris-lora==1.8.3
 flatten_json
 pyyaml
