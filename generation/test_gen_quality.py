@@ -81,7 +81,7 @@ def generate_images(
         pipeline = DiffusionPipeline.from_pretrained(
             "black-forest-labs/FLUX.1-dev",
             torch_dtype=dtype,
-            safety_checker=None,  # Disable safety checker for faster loading
+            # safety_checker=None,  # Disable safety checker for faster loading??
         )
         if model_path:
             pipeline.load_lora_weights(".", weight_name=model_path)

@@ -46,7 +46,6 @@ def generate_images(
         pipeline = DiffusionPipeline.from_pretrained(
             "black-forest-labs/FLUX.1-dev",
             torch_dtype=torch.float16,
-            safety_checker=None,  # Disable safety checker for faster loading
         )
         pipeline.load_lora_weights(".", weight_name=model_path)
         pipeline = pipeline.to(device)
