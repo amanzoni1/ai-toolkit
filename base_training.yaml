@@ -12,6 +12,8 @@ config:
         type: "lora"
         linear: 16
         linear_alpha: 16
+        # linear_alpha: if > than linear, faster convergence, LoRA contribution stronger.
+        # try 16-20 or 16-24, with less steps
 
       save:
         dtype: float32
@@ -25,7 +27,7 @@ config:
           caption_dropout_rate: 0.05
           shuffle_tokens: false
           cache_latents_to_disk: true
-          resolution: [768, 1024, 1536]
+          resolution: [768, 1024, 1536] # just 1024
 
       train:
         batch_size: 1
