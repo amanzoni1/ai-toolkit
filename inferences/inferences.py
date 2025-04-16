@@ -121,7 +121,7 @@ def generate_images(
     pipeline,
     prompts: list,
     output_dir: str,
-    num_steps: int = 15,
+    num_steps: int = 20,
     guidance_scale: float = 4.5,
     height: int = 1024,
     width: int = 1024,
@@ -280,7 +280,7 @@ def main():
         # Get common parameters
         output_dir = os.environ["OUTPUT_DIR"]
         model_path = os.environ["MODEL_PATH"]
-        num_steps = int(os.environ.get("NUM_STEPS", "15"))
+        num_steps = int(os.environ.get("NUM_STEPS", "20"))
         guidance_scale = float(os.environ.get("GUIDANCE_SCALE", "4.5"))
         width = int(os.environ.get("WIDTH", "1024"))
         height = int(os.environ.get("HEIGHT", "1024"))
