@@ -121,7 +121,7 @@ def generate_images(
     pipeline,
     prompts: list,
     output_dir: str,
-    num_steps: int = 40,
+    num_steps: int = 15,
     guidance_scale: float = 4.5,
     height: int = 1024,
     width: int = 1024,
